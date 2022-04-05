@@ -13,17 +13,16 @@
 		<RepositoryUrl>https://github.com/Imato/Imato.JsonConfiguration</RepositoryUrl>
 		<PackageTags>json file configuration</PackageTags>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<PackageReleaseNotes>Update to sync with Imato.JsonConfiguration</PackageReleaseNotes>
-		<Version>1.0.0</Version>
+		<PackageReleaseNotes>Ready to use</PackageReleaseNotes>
+		<Version>1.0.1</Version>
 		<AssemblyName>Imato.JsonConfiguration</AssemblyName>
 		<PackageIcon>icon.png</PackageIcon>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<EmbedUntrackedSources>true</EmbedUntrackedSources>
+		<DebugType>embedded</DebugType>
+		<Copyright>Alexey Varentsov</Copyright>
+		<RequireLicenseAcceptance>false</RequireLicenseAcceptance>
 	</PropertyGroup>
-
-	<ItemGroup>
-		<None Remove="icon.png" />
-	</ItemGroup>
 
 	<ItemGroup>
 		<None Include="icon.png" Pack="true" Visible="false" PackagePath="" />

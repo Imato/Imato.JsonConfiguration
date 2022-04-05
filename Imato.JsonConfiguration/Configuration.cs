@@ -1,5 +1,4 @@
 ﻿using System.IO;
-using System.Linq;
 using System.Text.Json;
 using System.Threading;
 
@@ -18,33 +17,32 @@ namespace Imato.JsonConfiguration
 
         private static string GetFilePath(string file)
         {
+            var directory = Path.GetDirectoryName(file);
+            directory = directory == string.Empty ? System.Environment.CurrentDirectory : directory;
+            var fileName = Path.GetFileName(file);
+
             if (!file.Contains("."))
             {
                 throw new FileNotFoundException("Specify file with extension");
             }
 
-            var fileName = "";
-
-            if (Environment.IsRelease)
+            if (!Environment.IsRelease)
             {
-                fileName = file;
+                var fa = fileName.Split('.');
+                fileName = $"{fa[0]}.{Environment.Name}.{fa[1]}";
             }
 
-            var fa = file.Split('.');
-            fileName = $"{fa[0]}.{Environment.Name}.{fa[1]}";
+            return Path.Combine(directory, fileName);
+        }
 
-            var filePath = Directory
-                .EnumerateFiles(System.Environment.CurrentDirectory,
-                    fileName,
-                    SearchOption.AllDirectories)
-                .FirstOrDefault();
-
-            if (filePath == null || !File.Exists(filePath))
+        public static string DefaultFile
+        {
+            get
             {
-                throw new FileNotFoundException(filePath);
+                var f = $"{typeof(T).Name}.json";
+                f = $"{f.Substring(0, 1).ToLower()}{f.Substring(1, f.Length - 1)}";
+                return Path.Combine(System.Environment.CurrentDirectory, f);
             }
-
-            return filePath;
         }
 
         /// <summary>
@@ -54,9 +52,15 @@ namespace Imato.JsonConfiguration
         /// <param name="fileName">JSON file name</param>
         /// <returns>Configuration</returns>
         /// <exception cref="FileNotFoundException"></exception>
-        public static T Get(string fileName = "configuration.json")
+        public static T Get(string fileName)
         {
-            var str = File.ReadAllText(GetFilePath(fileName));
+            var filePath = GetFilePath(fileName);
+            if (!File.Exists(filePath))
+            {
+                throw new FileNotFoundException(filePath);
+            }
+
+            var str = File.ReadAllText(filePath);
             var result = JsonSerializer.Deserialize<T>(str, options);
             if (result == null)
             {
@@ -72,14 +76,41 @@ namespace Imato.JsonConfiguration
         /// <param name="config"></param>
         /// <param name="fileName">JSON file name</param>
         /// <returns></returns>
-        /// <exception cref="FileNotFoundException"></exception>
-        public static void Save(T config, string fileName = "configuration.json")
+        public static void Save(T config, string fileName)
         {
             var filePath = GetFilePath(fileName);
             var str = JsonSerializer.Serialize(config, options);
             semaphore.WaitOne(10000);
+            if (!File.Exists(filePath))
+            {
+                File.Create(filePath).Close();
+            }
             File.WriteAllText(filePath, str);
             semaphore.Release();
+        }
+
+        /// <summary>
+        /// Read exists file nameof(T).json (nameof(T).Debug.json,  nameof(T).Test.json)
+        /// </summary>
+        /// <typeparam name="T">Serialized configuration class</typeparam>
+        /// <param name="fileName">JSON file name</param>
+        /// <returns>Configuration</returns>
+        /// <exception cref="FileNotFoundException"></exception>
+        public static T Get()
+        {
+            return Get(DefaultFile);
+        }
+
+        /// <summary>
+        /// Save configuration to file nameof(T).json (nameof(T).Debug.json,  nameof(T).Test.json)
+        /// </summary>
+        /// <typeparam name="T">Serialized configuration class</typeparam>
+        /// <param name="config"></param>
+        /// <param name="fileName">JSON file name</param>
+        /// <returns></returns>
+        public static void Save(T config)
+        {
+            Save(config, DefaultFile);
         }
     }
 }

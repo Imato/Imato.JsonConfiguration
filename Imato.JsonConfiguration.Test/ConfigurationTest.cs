@@ -25,7 +25,7 @@ namespace Imato.JsonConfiguration.Test
         [Test]
         public void Get()
         {
-            var r = Configuration<MyConfig>.Get();
+            var r = Configuration<MyConfig>.Get("configuration.json");
             Assert.AreEqual(config.Id, r.Id);
             Assert.AreEqual(config?.Internal?.Key1, r?.Internal?.Key1);
         }
@@ -34,9 +34,19 @@ namespace Imato.JsonConfiguration.Test
         public void Save()
         {
             config.Date = DateTime.Now;
+            Configuration<MyConfig>.Save(config, "configuration.json");
+            var r = Configuration<MyConfig>.Get("configuration.json");
+            Assert.AreEqual(config.Date, r.Date);
+        }
+
+        [Test]
+        public void SaveDefaultFile()
+        {
+            config.Date = DateTime.Now;
             Configuration<MyConfig>.Save(config);
             var r = Configuration<MyConfig>.Get();
             Assert.AreEqual(config.Date, r.Date);
+            File.Exists(Configuration<MyConfig>.DefaultFile);
         }
     }
 }
