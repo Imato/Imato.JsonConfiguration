@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32228.430
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Imato.JsonConfiguration", "Imato.JsonConfiguration\Imato.JsonConfiguration.csproj", "{7BCD7290-95EA-4A46-B860-3F17ABA11547}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Imato.JsonConfiguration.Test", "Imato.JsonConfiguration.Test\Imato.JsonConfiguration.Test.csproj", "{6B91CE5D-C113-4498-8EB3-64DB1A378C6F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7BCD7290-95EA-4A46-B860-3F17ABA11547}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BCD7290-95EA-4A46-B860-3F17ABA11547}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BCD7290-95EA-4A46-B860-3F17ABA11547}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BCD7290-95EA-4A46-B860-3F17ABA11547}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B91CE5D-C113-4498-8EB3-64DB1A378C6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B91CE5D-C113-4498-8EB3-64DB1A378C6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B91CE5D-C113-4498-8EB3-64DB1A378C6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B91CE5D-C113-4498-8EB3-64DB1A378C6F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D8B55E19-3399-421B-9054-51D5EF843A78}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<PackageId>Imato.JsonConfiguration</PackageId>
+		<Title>Imato.JsonConfiguration</Title>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<Authors>Alexey Varentsov (@imato)</Authors>
+		<Company>Imato</Company>
+		<PackageProjectUrl>https://github.com/Imato/Imato.JsonConfiguration</PackageProjectUrl>
+		<Description>Read and write app configuration from JSON file</Description>
+		<Summary></Summary>
+		<RepositoryUrl>https://github.com/Imato/Imato.JsonConfiguration</RepositoryUrl>
+		<PackageTags>json file configuration</PackageTags>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageReleaseNotes>Update to sync with Imato.JsonConfiguration</PackageReleaseNotes>
+		<Version>1.0.0</Version>
+		<AssemblyName>Imato.JsonConfiguration</AssemblyName>
+		<PackageIcon>icon.png</PackageIcon>
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+		<EmbedUntrackedSources>true</EmbedUntrackedSources>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Remove="icon.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="icon.png" Pack="true" Visible="false" PackagePath="" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="System.Text.Json" Version="6.0.2" />
+	</ItemGroup>
+
+</Project>
